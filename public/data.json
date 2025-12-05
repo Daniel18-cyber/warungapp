@@ -1,0 +1,12 @@
+{
+  "produk": [
+    { "id": 1, "nama": "Gula", "harga": 25000 },
+    { "id": 2, "nama": "Susu", "harga": 20000 },
+    { "id": 3, "nama": "Telur", "harga": 30000 }
+  ],
+  "transaksi": [
+    { "tanggal": "22 Sep", "produk": "Gula", "total": "Rp 25,000" },
+    { "tanggal": "21 Sep", "produk": "Susu", "total": "Rp 20,000" },
+    { "tanggal": "21 Sep", "produk": "Telur", "total": "Rp 30,000" }
+  ]
+}

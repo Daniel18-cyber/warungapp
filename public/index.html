@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WarungApp Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+  <div class="container">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+      <h2 class="logo">🏪 WarungApp</h2>
+      <nav>
+        <a href="dashboard.html" class="active">📊 Dashboard</a>
+        <a href="sales.html">💰 Sales</a>
+        <a href="inventory.html">📦 Inventory</a>
+        <a href="reports.html">📜 Reports</a>
+      </nav>
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+      <header>
+        <h1>Ringkasan Laporan</h1>
+        <p>Dashboard penjualan dan aktivitas warung Anda</p>
+      </header>
+
+
+      <!-- SUMMARY TOP CARDS -->
+      <section class="summary">
+        <div class="card">
+          <h3>Total Penjualan</h3>
+          <p class="value">Rp 15.750.000</p>
+        </div>
+
+        <div class="card">
+          <h3>Jumlah Transaksi</h3>
+          <p class="value">450</p>
+        </div>
+
+        <div class="card">
+          <h3>Rata-rata / Transaksi</h3>
+          <p class="value">Rp 35.000</p>
+        </div>
+      </section>
+
+
+      <!-- CHARTS SECTION -->
+      <section class="transactions" style="margin-top: 2rem;">
+
+        <!-- LINE CHART -->
+        <div class="new-transaction">
+          <h3>Grafik Penjualan Bulanan</h3>
+          <canvas id="salesChart"></canvas>
+        </div>
+
+        <!-- PIE CHART -->
+        <div class="recent-transactions">
+          <h3>Penjualan Berdasarkan Kategori</h3>
+          <canvas id="categoryChart"></canvas>
+        </div>
+
+      </section>
+
+
+      <!-- TRANSACTION TABLE -->
+      <section style="margin-top: 2rem;">
+        <h3>Transaksi Terakhir</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>Tanggal</th>
+              <th>Produk</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>22 Jun</td>
+              <td>Mie Instan</td>
+              <td>Rp 25.000</td>
+            </tr>
+            <tr>
+              <td>21 Jun</td>
+              <td>Susu</td>
+              <td>Rp 20.000</td>
+            </tr>
+            <tr>
+              <td>20 Jun</td>
+              <td>Telur</td>
+              <td>Rp 30.000</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+    </main>
+
+  </div>
+
+
+<script>
+// ===== LINE CHART =====
+const ctx = document.getElementById("salesChart");
+new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+    datasets: [{
+      label: "Penjualan",
+      data: [120, 180, 230, 780, 350, 800],
+      borderColor: "#2f4eff",
+      backgroundColor: "rgba(47, 78, 255, 0.1)",
+      borderWidth: 2,
+      tension: 0.3,
+      fill: true
+    }]
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: { beginAtZero: true }
+    }
+  }
+});
+
+
+// ===== PIE CHART =====
+const ctx2 = document.getElementById("categoryChart");
+new Chart(ctx2, {
+  type: "pie",
+  data: {
+    labels: ["Makanan", "Minuman", "Lainnya"],
+    datasets: [{
+      data: [55, 30, 15],
+      backgroundColor: ["#10b981", "#3b82f6", "#f59e0b"]
+    }]
+  }
+});
+</script>
+
+</body>
+</html>

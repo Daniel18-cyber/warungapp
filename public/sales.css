@@ -1,0 +1,134 @@
+
+.sales-container {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Sidebar / Menu kiri */
+.sales-sidebar {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.sales-sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+/* Search */
+.sales-search input {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    outline: none;
+    transition: .2s;
+}
+
+.sales-search input:focus {
+    border-color: #4b7bec;
+}
+
+/* Category Filter */
+.sales-category button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 8px;
+    border: none;
+    border-radius: 8px;
+    background: #f1f1f1;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.sales-category button:hover {
+    background: #4b7bec;
+    color: white;
+}
+
+/* Product Grid */
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    cursor: pointer;
+    transition: .2s;
+}
+
+.product-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+}
+
+.product-card img {
+    width: 90%;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.product-card h4 {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.product-card span {
+    font-weight: 600;
+    color: #4b7bec;
+}
+
+/* TABEL ADMIN */
+.sales-table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.sales-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.sales-table th {
+    background: #4b7bec;
+    color: white;
+    padding: 12px;
+    text-align: left;
+}
+
+.sales-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #eee;
+}
+
+/* Button Aksi */
+.btn-action {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #4b7bec;
+    color: white;
+    cursor: pointer;
+    transition: .2s;
+}
+
+.btn-action:hover {
+    background: #3867d6;
+}
