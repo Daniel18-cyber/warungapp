@@ -12,6 +12,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0"
-  }
+    "express": "^5.2.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Daniel18-cyber/warungapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Daniel18-cyber/warungapp/issues"
+  },
+  "homepage": "https://github.com/Daniel18-cyber/warungapp#readme"
 }
