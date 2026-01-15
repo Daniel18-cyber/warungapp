@@ -3,28 +3,31 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  display: flex;
   background-color: #f4f6fb;
   color: #1e293b;
+  overflow: hidden;
+  height: 100vh;
 }
 
 /* Layout utama */
 .container {
   display: flex;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  gap : 30px;
 }
 
 /* ===== SIDEBAR ===== */
 .sidebar {
   width: 240px;
   background-color: #eef1f7;
-  height: 100vh;
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 2rem;
   box-shadow: 2px 0 6px rgba(0,0,0,0.06);
+  height: auto;
+  flex-shrink: 0;
 }
 
 .sidebar .logo {
@@ -65,9 +68,12 @@ body {
 }
 
 /* ===== MAIN CONTENT ===== */
-.main {
+.main{
   flex: 1;
   padding: 2rem 3rem;
+  overflow-y: auto;      /* ini yang bikin bisa scroll sampai bawah */
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 /* Title */
@@ -160,4 +166,109 @@ table th {
 
 table tbody tr:hover {
   background-color: #f8fafc;
+}
+
+/* Biar section gak mepet dan bisa turun penuh */
+.summary,
+.transactions {
+  margin-bottom: 40px;
+}
+
+.transactions {
+  align-items: stretch;
+}
+
+/* Jarak aman dari tepi kanan-kiri dan bawah */
+.content > * {
+  margin-bottom: 32px;
+}
+
+/* Khusus card besar (grafik & pie) */
+.transactions > div {
+  margin-bottom: 24px;
+}
+
+/* Box tabel biar ada ruang napas */
+.recent-transactions,
+.new-transaction {
+  padding: 2rem;
+}
+
+/* Biar layout dua kolom gak nempel */
+.transactions {
+  gap: 2rem;
+}
+
+.sidebar-bottom {
+  margin-top: 220px; /* bikin nempel di bawah */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+}
+
+.sidebar-bottom a {
+  text-decoration: none;
+  color: #475569;
+  font-weight: 500;
+  padding: 0.7rem 1rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: 0.25s;
+}
+
+.sidebar-bottom a:hover {
+  background-color: #dce3f8;
+}
+
+.sidebar-bottom .logout:hover {
+  background-color: #fee2e2;
+  color: #dc2626;
+}
+
+.logout-btn {
+  
+  border: none;
+  padding: 0.7rem;
+  border-radius: 12px;
+  cursor: pointer;
+  color: #ef4444;
+}
+
+.logout-btn:hover {
+  background-color: #fee2e2;
+}
+
+.profile-card {
+  max-width: 600px;
+  background: white;
+  padding: 2rem;
+  border-radius: 18px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  margin-top: 2rem;
+}
+
+.profile-avatar {
+  font-size: 56px;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.profile-row {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.profile-row span {
+  color: #64748b;
 }

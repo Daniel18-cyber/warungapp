@@ -79,3 +79,4 @@ document.getElementById("btnAddProduct").onclick = openAdd;
 
 // Initial load
 window.onload = loadProducts;
+

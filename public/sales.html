@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="./sales.css">
 </head>
+
 <body>
      <div class="container">
   <aside class="sidebar">
@@ -15,60 +16,132 @@
       <a href="./dashboard.html">📊 Dashboard</a>
       <a href="./sales.html" class="active">💰 Sales</a>
       <a href="./inventory.html">📦 Inventory</a>
-      <a href="./reports.html">📜 Reports</a>
+      <a href="profile.html">👤 Profile</a>
+      
+        <div class="sidebar-bottom">
+        <button class="logout-btn">Logout</button>
+     </div>
     </nav>
   </aside>
   <main class="content">
+  <h1>Sales</h1>
+  <p>Kelola transaksi penjualan</p>
+
+  <div class="sales-container">
+
    
-    
-    <h1>Sales</h1>
-    <p>Kelola transaksi penjualan</p>
+    <div class="sales-left">
 
-    <div class="sales-container">
-
-      <!-- SIDEBAR SALES -->
-      <div class="sales-sidebar">
-        <h3>Kategori</h3>
-
-        <div class="sales-search">
-          <input type="text" placeholder="Cari produk...">
-        </div>
+      <div class="sales-filter-box sales-topbar">
+        <input type="text" class="sales-search-input" placeholder="Cari produk...">
 
         <div class="sales-category">
-          <button>Semua</button>
-          <button>Makanan</button>
-          <button>Minuman</button>
-          <button>Sembako</button>
+          <button class="cat-btn">Semua</button>
+          <button class="cat-btn">Makanan</button>
+          <button class="cat-btn">Minuman</button>
+          <button class="cat-btn">Sembako</button>
         </div>
       </div>
 
-      <!-- PRODUK GRID -->
-      <div class="product-grid">
+      
+      <div class="product-card" data-name="Indomie Goreng" data-price="3000">
         <div class="product-card">
           <img src="https://via.placeholder.com/150">
           <h4>Indomie Goreng</h4>
           <span>Rp 3.000</span>
+          <button class="add-btn">+ Tambah</button>
         </div>
 
-        <div class="product-card">
+        <div class="product-card" data-name="Teh Botol" data-price="4000">
           <img src="https://via.placeholder.com/150">
           <h4>Teh Botol</h4>
           <span>Rp 4.000</span>
+          <button class="add-btn">+ Tambah</button>
         </div>
 
-        <div class="product-card">
+        <div class="product-card" data-name="Beras 5kg" data-price="65000">
           <img src="https://via.placeholder.com/150">
           <h4>Beras 5kg</h4>
           <span>Rp 65.000</span>
+          <button class="add-btn">+ Tambah</button>
+        </div>
+
+        <div class="product-card" data-name="Indomie Goreng" data-price="3000">
+          <img src="https://via.placeholder.com/150">
+          <h4>Indomie Goreng</h4>
+          <span>Rp 3.000</span>
+          <button class="add-btn">+ Tambah</button>
         </div>
       </div>
 
     </div>
 
+   
+    <aside class="sales-cart">
+      <h3>Keranjang</h3>
 
+      <div class="cart-items">
+        Belum ada produk
+      </div>
 
-  </main>
+      <div class="cart-footer">
+        <div class="total">
+          <span>Total</span>
+          <strong>Rp 0</strong>
+        </div>
+        <button class="checkout-btn">Bayar</button>
+      </div>
+    </aside>
 
   </div>
+</main>
+
+</div>
+
+<script>
+const cart = {};
+const cartItems = document.querySelector('.cart-items');
+const totalEl = document.querySelector('.total strong');
+
+function formatRupiah(num) {
+  return 'Rp ' + num.toLocaleString('id-ID');
+}
+
+document.querySelectorAll('.add-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const card = btn.closest('.product-card');
+    const name = card.dataset.name;
+    const price = parseInt(card.dataset.price);
+
+    if (!cart[name]) {
+      cart[name] = { qty: 1, price };
+    } else {
+      cart[name].qty++;
+    }
+
+    renderCart();
+  });
+});
+
+function renderCart() {
+  cartItems.innerHTML = '';
+  let total = 0;
+
+  Object.keys(cart).forEach(name => {
+    const item = cart[name];
+    total += item.qty * item.price;
+
+    cartItems.innerHTML += `
+      <div class="cart-row">
+        <span>${item.qty}x ${name}</span>
+        <span>${formatRupiah(item.qty * item.price)}</span>
+      </div>
+    `;
+  });
+
+  totalEl.textContent = formatRupiah(total);
+}
+</script>
+
 </body>
 </html>

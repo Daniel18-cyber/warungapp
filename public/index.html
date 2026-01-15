@@ -20,7 +20,13 @@
         <a href="dashboard.html" class="active">📊 Dashboard</a>
         <a href="sales.html">💰 Sales</a>
         <a href="inventory.html">📦 Inventory</a>
-        <a href="reports.html">📜 Reports</a>
+        <a href="profile.html">👤 Profile</a>
+
+        
+      <div class="sidebar-bottom">
+        <button class="logout-btn">Logout</button>
+     </div>
+
       </nav>
     </aside>
 
@@ -142,6 +148,32 @@ new Chart(ctx2, {
       data: [55, 30, 15],
       backgroundColor: ["#10b981", "#3b82f6", "#f59e0b"]
     }]
+  }
+});
+</script>
+
+<form id="loginForm">
+  <input type="text" name="username" placeholder="username" />
+  <input type="password" name="password" placeholder="password" />
+  <button type="submit">Login</button>
+</form>
+
+<script>
+document.getElementById("loginForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const form = e.target;
+
+  const res = await fetch("/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: `username=${form.username.value}&password=${form.password.value}`
+  });
+
+  const data = await res.json();
+  if (data.success) {
+    window.location.href = "/dashboard.html";
+  } else {
+    alert("login salah");
   }
 });
 </script>
