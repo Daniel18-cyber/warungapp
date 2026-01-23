@@ -6,14 +6,46 @@
   <title>WarungApp Dashboard</title>
   <link rel="stylesheet" href="style.css">
 
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
+
+  
+</script>
+
+  <script>
+(async () => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    window.location.href = "/login.html";
+    return;
+  }
+
+  try {
+    const res = await fetch("/me", {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+
+    const data = await res.json();
+
+    if (data === false) {
+      localStorage.removeItem("token");
+      window.location.href = "/login.html";
+    }
+  } catch (err) {
+    localStorage.removeItem("token");
+    window.location.href = "/login.html";
+  }
+})();
+</script>
+
   <div class="container">
 
-    <!-- SIDEBAR -->
+    
     <aside class="sidebar">
       <h2 class="logo">🏪 WarungApp</h2>
       <nav>
@@ -27,11 +59,37 @@
         <button class="logout-btn">Logout</button>
      </div>
 
+    
+   <script>
+document.addEventListener("DOMContentLoaded", () => {
+  const logoutBtn = document.querySelector(".logout-btn");
+  const modal = document.getElementById("logoutModal");
+  const cancelBtn = document.getElementById("cancelLogout");
+  const confirmBtn = document.getElementById("confirmLogout");
+
+  logoutBtn.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  confirmBtn.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.replace("/login.html");
+  });
+});
+</script>
+
+
+</script>
+
       </nav>
     </aside>
 
 
-    <!-- MAIN CONTENT -->
+    
     <main class="main">
       <header>
         <h1>Ringkasan Laporan</h1>
@@ -39,35 +97,34 @@
       </header>
 
 
-      <!-- SUMMARY TOP CARDS -->
+     
       <section class="summary">
         <div class="card">
           <h3>Total Penjualan</h3>
-          <p class="value">Rp 15.750.000</p>
+          <p class="value" id="totalPenjualan">loading...</p>
         </div>
 
         <div class="card">
           <h3>Jumlah Transaksi</h3>
-          <p class="value">450</p>
+          <p class="value" id="totalPenjualan">loading...</p>
         </div>
 
         <div class="card">
           <h3>Rata-rata / Transaksi</h3>
-          <p class="value">Rp 35.000</p>
+          <p class="value" id="totalPenjualan">loading...</p>
         </div>
       </section>
 
-
-      <!-- CHARTS SECTION -->
+      
       <section class="transactions" style="margin-top: 2rem;">
 
-        <!-- LINE CHART -->
+        
         <div class="new-transaction">
           <h3>Grafik Penjualan Bulanan</h3>
           <canvas id="salesChart"></canvas>
         </div>
 
-        <!-- PIE CHART -->
+        
         <div class="recent-transactions">
           <h3>Penjualan Berdasarkan Kategori</h3>
           <canvas id="categoryChart"></canvas>
@@ -76,7 +133,7 @@
       </section>
 
 
-      <!-- TRANSACTION TABLE -->
+      
       <section style="margin-top: 2rem;">
         <h3>Transaksi Terakhir</h3>
         <table>
@@ -113,7 +170,7 @@
 
 
 <script>
-// ===== LINE CHART =====
+
 const ctx = document.getElementById("salesChart");
 new Chart(ctx, {
   type: "line",
@@ -138,7 +195,7 @@ new Chart(ctx, {
 });
 
 
-// ===== PIE CHART =====
+
 const ctx2 = document.getElementById("categoryChart");
 new Chart(ctx2, {
   type: "pie",
@@ -152,30 +209,32 @@ new Chart(ctx2, {
 });
 </script>
 
-<form id="loginForm">
-  <input type="text" name="username" placeholder="username" />
-  <input type="password" name="password" placeholder="password" />
-  <button type="submit">Login</button>
-</form>
+<div id="logoutModal" class="modal hidden">
+  <div class="modal-box">
+    <h3>Yakin mau logout?</h3>
+    <div class="modal-actions">
+      <button id="cancelLogout" class="btn cancel">Batal</button>
+      <button id="confirmLogout" class="btn danger">Logout</button>
+    </div>
+  </div>
+</div>
 
 <script>
-document.getElementById("loginForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const form = e.target;
-
-  const res = await fetch("/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/x-www-form-urlencoded" },
-    body: `username=${form.username.value}&password=${form.password.value}`
-  });
-
+async function loadDashboard() {
+  const res = await fetch("/api/dashboard-summary");
   const data = await res.json();
-  if (data.success) {
-    window.location.href = "/dashboard.html";
-  } else {
-    alert("login salah");
-  }
-});
+
+  document.getElementById("totalPenjualan").innerText =
+    "Rp " + Number(data.total_penjualan || 0).toLocaleString();
+
+  document.getElementById("totalTransaksi").innerText =
+    data.total_transaksi || 0;
+
+  document.getElementById("rataRata").innerText =
+    "Rp " + Number(data.rata_rata || 0).toLocaleString();
+}
+
+loadDashboard();
 </script>
 
 </body>

@@ -6,20 +6,16 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "dev": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.2.1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Daniel18-cyber/warungapp.git"
-  },
-  "bugs": {
-    "url": "https://github.com/Daniel18-cyber/warungapp/issues"
-  },
-  "homepage": "https://github.com/Daniel18-cyber/warungapp#readme"
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mysql2": "^3.16.1"
+  }
 }

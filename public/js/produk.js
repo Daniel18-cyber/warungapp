@@ -1,6 +1,6 @@
 export async function loadProduk() {
   try {
-    const res = await fetch("/produk"); // ambil data dari server Express
+    const res = await fetch("/api/products"); 
     const data = await res.json();
 
     const select = document.querySelector("select");
